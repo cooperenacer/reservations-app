@@ -6,12 +6,13 @@ import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 
 export const eventStartAddNew = (event) => {
-    const uid = '6084449bf91b360015ab3e5d';
-    const name = "prueba"
+    // const uid = '6084449bf91b360015ab3e5d';
+    // const name = "prueba"
 
     const eid = uuidv4();
     return async (dispatch, getState) => {
 
+        const { uid, name } = getState().auth.uid;
         try {
             console.log('EVENTO', event)
             await db.collection("reservation").add(
@@ -19,6 +20,7 @@ export const eventStartAddNew = (event) => {
                     eid,
                     uid,
                     name,
+                    state: 1,
                     ...event
                 }
             )

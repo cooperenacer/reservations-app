@@ -11,7 +11,6 @@ export const eventStartAddNew = (event) => {
 
     const eid = uuidv4();
     return async (dispatch, getState) => {
-        // const { uid, name } = getState().auth;
 
         try {
             console.log('EVENTO', event)
@@ -122,4 +121,8 @@ export const eventStartLoading = () => {
 const eventLoaded = (events) => ({
     type: types.eventLoaded,
     payload: events
+});
+
+export const eventLogout = () => ({
+    type: types.eventLogout
 })

@@ -10,13 +10,11 @@ html, body {
 }
 
 .rbc-calendar {
-    height: 100vh;
+    height: 100%;
 }
 
-
 /* Modal */
-
-.ReactModalPortal > div {
+.ReactModalPortal > div{
     opacity: 0;
 }
 
@@ -57,8 +55,7 @@ html, body {
 }
 
 
-/*Datepicker*/
-
+/* Datepicker */
 .react-datetime-picker input:focus {
     outline: none;
 }
@@ -67,9 +64,7 @@ html, body {
     border: 0px solid gray !important;
 }
 
-
-/*FABS*/
-
+/* FABS */
 .fab {
     border-radius: 100%;
     bottom: 25px;

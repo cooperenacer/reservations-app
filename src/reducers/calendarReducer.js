@@ -21,10 +21,10 @@ const initialState = {
 
 
 export const calendarReducer = (state = initialState, action) => {
-
     switch (action.type) {
 
         case types.eventSetActive:
+            console.log('CR', state)
             return {
                 ...state,
                 activeEvent: action.payload

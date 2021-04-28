@@ -3,13 +3,13 @@ import { prepareEvents } from "../helpers/prepareEvents";
 import { types } from "../types/types";
 import moment from 'moment'
 
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 export const eventStartAddNew = (event) => {
     const uid = '6084449bf91b360015ab3e5d';
     const name = "prueba"
 
-    // const eid = uuidv4();
+    const eid = uuidv4();
     return async (dispatch, getState) => {
         // const { uid, name } = getState().auth;
 
@@ -17,13 +17,14 @@ export const eventStartAddNew = (event) => {
             console.log('EVENTO', event)
             await db.collection("reservation").add(
                 {
+                    eid,
                     uid,
+                    name,
                     ...event
                 }
-            ).then((docRef) =>
-                // console.log(docRef.id)
-                event.id = docRef.id
             )
+
+            event.id = eid;
 
             event.user = {
                 uid,
@@ -55,15 +56,21 @@ export const eventUpdated = (event) => ({
 });
 
 
-const deleteEvent = (id) => db.collection("reservation").doc(id).delete();
+
 
 export const eventStartDelete = () => {
+
     return async (dispatch, getState) => {
 
-        const { id } = getState().calendar.activeEvent;
+        const { eid } = getState().calendar.activeEvent;
+        const event = db.collection('reservation').where('eid', '==', eid);
 
         try {
-            await deleteEvent(id);
+            event.get().then((querySnapchot) => {
+                querySnapchot.forEach((doc) => {
+                    doc.ref.delete();
+                })
+            })
 
             dispatch(eventDeleted());
         } catch (error) {
@@ -75,10 +82,6 @@ export const eventStartDelete = () => {
 export const eventDeleted = () => ({ type: types.eventDeleted });
 
 const fetchData = () => db.collection("reservation").get();
-
-
-
-
 
 
 const prepareData = (events = []) => {

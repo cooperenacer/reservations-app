@@ -6,7 +6,9 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "chokidar": "^2.1.8",
     "enzyme-to-json": "^3.6.1",
+    "firebase": "^8.4.2",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-big-calendar": "^0.30.0",
@@ -19,6 +21,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "sweetalert2": "^10.13.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

@@ -4,12 +4,12 @@ import { types } from "../types/types";
 import moment from 'moment'
 
 import { v4 as uuidv4 } from 'uuid'
+import Swal from "sweetalert2";
 
 export const eventStartAddNew = (event) => {
-    // const uid = '6084449bf91b360015ab3e5d';
-    // const name = "prueba"
 
     const eid = uuidv4();
+
     return async (dispatch, getState) => {
 
         const { uid, name } = getState().auth.uid;
@@ -51,6 +51,18 @@ export const eventSetActive = (event) => ({
 
 export const eventClearActiveEvent = () => ({ type: types.eventClearActiveEvent });
 
+//Realizar
+export const eventStartUpdate = (event) => {
+    return async (dispatch) => {
+        try {
+
+        } catch (error) {
+
+        }
+    }
+}
+
+
 export const eventUpdated = (event) => ({
     type: types.eventUpdated,
     payload: event
@@ -63,19 +75,28 @@ export const eventStartDelete = () => {
 
     return async (dispatch, getState) => {
 
-        const { eid } = getState().calendar.activeEvent;
-        const event = db.collection('reservation').where('eid', '==', eid);
+        const { eid, name } = getState().calendar.activeEvent;
 
-        try {
-            event.get().then((querySnapchot) => {
-                querySnapchot.forEach((doc) => {
-                    doc.ref.delete();
+        const { name: userName } = getState().auth.uid;
+
+        console.log(userName, name);
+        if (userName === name) {
+
+            const event = db.collection('reservation').where('eid', '==', eid);
+
+            try {
+                event.get().then((querySnapchot) => {
+                    querySnapchot.forEach((doc) => {
+                        doc.ref.delete();
+                    })
                 })
-            })
 
-            dispatch(eventDeleted());
-        } catch (error) {
-            console.log(error);
+                dispatch(eventDeleted());
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            Swal.fire('Error', 'No tiene permisos para borrar esta cita', 'error')
         }
     }
 }

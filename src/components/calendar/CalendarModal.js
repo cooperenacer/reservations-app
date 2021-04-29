@@ -7,7 +7,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartLoading, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
 
 
 const customStyles = {
@@ -139,7 +139,7 @@ export const CalendarModal = () => {
             .then((result) => {
                 if (result.isConfirmed) {
                     dispatch(eventStartStatusUpdate(activeEvent, 2))
-                    console.log('aceptada')
+                    console.log('aceptada');
                 } else if (result.isDenied) {
                     dispatch(eventStartStatusUpdate(activeEvent, 3))
                     console.log('rechazada')

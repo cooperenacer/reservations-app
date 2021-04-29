@@ -97,6 +97,8 @@ export const eventStartDelete = () => {
                             'Su cita ha sido elminada con exito',
                             'warning'
                         )
+                        dispatch(eventStartLoading())
+
                     }
                     )
                     .catch((e) => console.log(e))
@@ -144,7 +146,6 @@ export const eventStartLoading = () => {
             console.log('events', events)
             dispatch(eventLoaded(events));
 
-
         } catch (error) {
             console.log(error)
         }
@@ -179,6 +180,7 @@ export const eventStartStatusUpdate = (event, status) => {
                 .then(() => {
                     console.log('status actualizado')
                     dispatch(eventUpdated(event))
+                    dispatch(eventStartLoading())
                 })
                 .catch((e) => console.log(e))
 

@@ -26,14 +26,10 @@ export const eventStartAddNew = (event) => {
                 }
             )
 
-            event.id = eid;
+            event.eid = eid;
             event.uid = uid;
             event.name = name;
             event.state = state;
-            // event.user = {
-            //     uid,
-            //     name
-            // }
             dispatch(eventAddNew(event));
 
         } catch (error) {
@@ -76,13 +72,14 @@ export const eventUpdated = (event) => ({
 
 export const eventStartDelete = () => {
 
-    return async (dispatch, getState) => {
+    return (dispatch, getState) => {
 
         const { eid, uid } = getState().calendar.activeEvent;
 
         const { uid: userUid } = getState().auth;
 
         console.log(userUid, uid);
+
         if (userUid === uid) {
 
             const event = db.collection('reservation').where('eid', '==', eid);
@@ -93,8 +90,11 @@ export const eventStartDelete = () => {
                         doc.ref.delete();
                     })
                 })
+                    .then(() =>
+                        dispatch(eventDeleted())
+                    )
+                    .catch((e) => console.log(e))
 
-                dispatch(eventDeleted());
             } catch (error) {
                 console.log(error);
             }

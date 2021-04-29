@@ -54,6 +54,7 @@ export const calendarReducer = (state = initialState, action) => {
             }
 
         case types.eventDeleted:
+            console.log(state.events)
             return {
                 ...state,
                 events: state.events.filter(
@@ -66,7 +67,10 @@ export const calendarReducer = (state = initialState, action) => {
                 ...state,
                 events: [...action.payload]
             }
-
+        case types.eventLogout:
+            return {
+                ...initialState
+            }
         default:
             return state;
     }

@@ -8,6 +8,8 @@ export const DeleteEventFab = () => {
 
     const handleDelete = () => {
         dispatch(eventStartDelete());
+
+       
     }
 
     return (

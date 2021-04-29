@@ -90,8 +90,14 @@ export const eventStartDelete = () => {
                         doc.ref.delete();
                     })
                 })
-                    .then(() =>
+                    .then(() => {
                         dispatch(eventDeleted())
+                        Swal.fire(
+                            'Reservación eliminada',
+                            'Su cita ha sido elminada con exito',
+                            'warning'
+                        )
+                    }
                     )
                     .catch((e) => console.log(e))
 

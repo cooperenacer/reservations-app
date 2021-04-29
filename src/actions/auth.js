@@ -30,12 +30,13 @@ export const login = (user) => ({
     payload: user
 });
 
-export const startRegister = (email, password, name) => {
+export const startRegister = (email, numero, password, name) => {
     return (dispatch) => {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(async ({ user }) => {
                 await user.updateProfile({
-                    displayName: name
+                    displayName: name,
+                    number: numero
                 });
                 dispatch(
                     login({

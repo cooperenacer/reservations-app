@@ -62,10 +62,10 @@ export const eventStartUpdate = (event) => {
 }
 
 
-export const eventUpdated = (event) => ({
-    type: types.eventUpdated,
-    payload: event
-});
+// export const eventUpdated = (event) => ({
+//     type: types.eventUpdated,
+//     payload: event
+// });
 
 
 
@@ -157,4 +157,37 @@ const eventLoaded = (events) => ({
 
 export const eventLogout = () => ({
     type: types.eventLogout
+})
+
+export const eventStartStatusUpdate = (event, status) => {
+
+    const { eid } = event;
+
+    return async (dispatch) => {
+        try {
+
+            const getEvent = await db.collection('reservation').where('eid', '==', eid);
+
+
+            const docRef = await getEvent.get()
+
+            const ref = await docRef.docs[0].id;
+            db.doc(`reservation/${ref}`).update({
+                ...event,
+                state: status
+            })
+                .then(() => {
+                    console.log('status actualizado')
+                    dispatch(eventUpdated(event))
+                })
+                .catch((e) => console.log(e))
+
+        } catch (error) {
+
+        }
+    }
+}
+export const eventUpdated = (event) => ({
+    type: types.eventUpdated,
+    payload: event
 })

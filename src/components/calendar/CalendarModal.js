@@ -7,7 +7,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
 
 
 const customStyles = {
@@ -57,13 +57,6 @@ export const CalendarModal = () => {
             setFormValues(initEvent);
         }
     }, [activeEvent, setFormValues])
-
-    // useEffect(() => {
-    //     setFormValues({
-    //         ...formValues,
-    //         nombre: name
-    //     })
-    // }, [formValues, name])
 
 
     const handleInputChange = ({ target }) => {
@@ -128,6 +121,33 @@ export const CalendarModal = () => {
 
     }
 
+    const handleStatus = (e) => {
+        e.preventDefault();
+        // console.log('cambiar estado', activeEvent?.eid)
+
+        Swal.fire({
+            title: 'Cambiar estado de reservación',
+            confirmButtonText:
+                '<i class="fa fa-thumbs-up"></i> Aceptar',
+            showCancelButton: true,
+            cancelButtonText:
+                '<i class="fa fa-thumbs-down"></i> Cancelar',
+            showCloseButton: true,
+            showDenyButton: true,
+            denyButtonText: '<i class="fa fa-thumbs-down"></i> Rechazar',
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(eventStartStatusUpdate(activeEvent, 2))
+                    console.log('aceptada')
+                } else if (result.isDenied) {
+                    dispatch(eventStartStatusUpdate(activeEvent, 3))
+                    console.log('rechazada')
+                } else {
+                    console.log('cancelada')
+                }
+            })
+    }
 
     return (
         <Modal
@@ -138,7 +158,15 @@ export const CalendarModal = () => {
             className="modal"
             overlayClassName="modal-fondo"
         >
-            <h1> {(activeEvent) ? 'Editar reservación' : 'Crear reservación'} </h1>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <h1> {(activeEvent) ? 'Editar reservación' : 'Crear reservación'} </h1>
+                {
+                    name === 'Cooperenacer' ? (
+
+                        <button onClick={handleStatus}>Aprobar</button>
+                    ) : null
+                }
+            </div>
             <hr />
             <form
                 className="container"

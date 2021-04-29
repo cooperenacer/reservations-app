@@ -61,8 +61,22 @@ export const CalendarScreen = () => {
 
     const eventStyleGetter = (event, start, end, isSelected) => {
 
+        let color = '';
+
+        if (event.state === 1 && uid !== event.uid) {
+            color = '#465660'
+        } else if (event.state === 2) {
+            color = '#0EF65D'
+        }
+        else if (event.state === 3) {
+            color = '#EB0606'
+        } else if (event.state === 1 && uid === event.uid){
+            color = '#367CF7'
+        }
+
         const style = {
-            backgroundColor: (uid === event.uid) ? '#367CF7' : '#465660',
+            // backgroundColor: (uid === event.uid) ? '#367CF7' : '#465660',
+            backgroundColor: color,
             borderRadius: '0px',
             opacity: 0.8,
             display: 'block',

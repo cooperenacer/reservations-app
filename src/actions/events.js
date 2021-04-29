@@ -75,12 +75,12 @@ export const eventStartDelete = () => {
 
     return async (dispatch, getState) => {
 
-        const { eid, name } = getState().calendar.activeEvent;
+        const { eid, uid } = getState().calendar.activeEvent;
 
-        const { name: userName } = getState().auth.uid;
+        const { uid: userUid } = getState().auth.uid;
 
-        console.log(userName, name);
-        if (userName === name) {
+        console.log(userUid, uid);
+        if (userUid === uid) {
 
             const event = db.collection('reservation').where('eid', '==', eid);
 

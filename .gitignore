@@ -104,4 +104,4 @@ dist
 .tern-port
 
 #firebase config
-firebase/firebase-config.js
+src/firebase/firebase-config.js

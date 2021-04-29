@@ -60,7 +60,9 @@ export const checkingFinish = () => ({
 });
 
 export const startLogout = () => {
-    return (dispatch) => {
+    return async(dispatch) => {
+
+        await firebase.auth().signOut();
         localStorage.clear();
         dispatch(eventLogout);
         dispatch(logout())

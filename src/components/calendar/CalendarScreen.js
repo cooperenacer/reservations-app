@@ -38,9 +38,6 @@ export const CalendarScreen = () => {
 
     }, [dispatch])
 
-    // useEffect(() => {
-    //     console.log(events)
-    // }, [events])
 
     const onDoubleClick = (e) => {
         // console.log(e);

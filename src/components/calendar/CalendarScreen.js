@@ -28,14 +28,13 @@ export const CalendarScreen = () => {
     const dispatch = useDispatch();
     const { events, activeEvent } = useSelector(state => state.calendar);
 
-    const { uid } = useSelector(state => state.auth.uid);
+    const { uid } = useSelector(state => state.auth);
 
     const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
 
 
     useEffect(() => {
         dispatch(eventStartLoading());
-
     }, [dispatch])
 
 

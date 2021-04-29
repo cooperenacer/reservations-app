@@ -8,7 +8,7 @@ import { eventLogout } from './events';
 export const startLogin = (email, password) => {
     return (dispatch) => {
 
-        return firebase.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(({ user }) => {
                 dispatch(
                     login({
@@ -16,7 +16,7 @@ export const startLogin = (email, password) => {
                         name: user.displayName
                     })
                 )
-                localStorage.setItem('token-init-date', new Date().getTime())
+                localStorage.setItem('token-init-date', new Date().getTime());
             })
             .catch((e) => {
                 console.log(e)
@@ -25,12 +25,9 @@ export const startLogin = (email, password) => {
     }
 };
 
-export const login = (uid, displayName) => ({
+export const login = (user) => ({
     type: types.authLogin,
-    payload: {
-        uid,
-        displayName
-    }
+    payload: user
 });
 
 export const startRegister = (email, password, name) => {
@@ -60,7 +57,7 @@ export const checkingFinish = () => ({
 });
 
 export const startLogout = () => {
-    return async(dispatch) => {
+    return async (dispatch) => {
 
         await firebase.auth().signOut();
         localStorage.clear();

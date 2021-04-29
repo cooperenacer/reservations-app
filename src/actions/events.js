@@ -12,7 +12,8 @@ export const eventStartAddNew = (event) => {
 
     return async (dispatch, getState) => {
 
-        const { uid, name } = getState().auth.uid;
+        const { uid, name } = getState().auth;
+        const state = 1;
         try {
             console.log('EVENTO', event)
             await db.collection("reservation").add(
@@ -20,17 +21,19 @@ export const eventStartAddNew = (event) => {
                     eid,
                     uid,
                     name,
-                    state: 1,
+                    state,
                     ...event
                 }
             )
 
             event.id = eid;
-
-            event.user = {
-                uid,
-                name
-            }
+            event.uid = uid;
+            event.name = name;
+            event.state = state;
+            // event.user = {
+            //     uid,
+            //     name
+            // }
             dispatch(eventAddNew(event));
 
         } catch (error) {
@@ -77,7 +80,7 @@ export const eventStartDelete = () => {
 
         const { eid, uid } = getState().calendar.activeEvent;
 
-        const { uid: userUid } = getState().auth.uid;
+        const { uid: userUid } = getState().auth;
 
         console.log(userUid, uid);
         if (userUid === uid) {

@@ -4,14 +4,14 @@ import 'firebase/auth';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAMMAzbDJfiDZ6hLxKxHG41MTdsqIxqNhM",
-    authDomain: "cooperenacer-reservas.firebaseapp.com",
-    databaseURL: "https://cooperenacer-reservas-default-rtdb.firebaseio.com",
-    projectId: "cooperenacer-reservas",
-    storageBucket: "cooperenacer-reservas.appspot.com",
-    messagingSenderId: "458304167676",
-    appId: "1:458304167676:web:8f79e8f95aeb7a66748179",
-    measurementId: "G-VGKBY13WG2"
+    apiKey: process.env.REACT_APP_APIKEY,
+    authDomain: process.env.REACT_APP_AUTHDOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASEURL,
+    projectId: process.env.REACT_APP_PROJECTID,
+    storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+    appId: process.env.REACT_APP_APPID,
+    measurementId: process.env.REACT_APP_MEASUREMENTID
 }
 
 //Initialize Firebase

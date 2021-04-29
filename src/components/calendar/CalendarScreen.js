@@ -66,7 +66,7 @@ export const CalendarScreen = () => {
         if (event.state === 1 && uid !== event.uid) {
             color = '#465660'
         } else if (event.state === 2) {
-            color = '#0EF65D'
+            color = '#5cc72e'
         }
         else if (event.state === 3) {
             color = '#EB0606'

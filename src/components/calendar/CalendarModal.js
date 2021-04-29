@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
 import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
 
+require('dotenv').config()
+
 
 const customStyles = {
     content: {
@@ -50,6 +52,7 @@ export const CalendarModal = () => {
 
     const { motivo, nombre, cedula, start, end } = formValues;
 
+    const ADMINID = process.env.REACT_APP_ADMINID
     useEffect(() => {
         if (activeEvent) {
             setFormValues(activeEvent);
@@ -162,7 +165,7 @@ export const CalendarModal = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h1> {(activeEvent) ? 'Editar reservación' : 'Crear reservación'} </h1>
                 {
-                    uid === 'HlW8UDn7rzeDxt6fJUtAxUTSi2E3' ? (
+                    uid === ADMINID ? (
 
                         <button onClick={handleStatus}>Aprobar</button>
                     ) : null

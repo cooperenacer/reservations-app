@@ -3,6 +3,7 @@ html, body {
     width: 100vw;
 }
 
+
 .calendar-screen {
     display: flex;
     flex-flow: column;
@@ -13,8 +14,10 @@ html, body {
     height: 100%;
 }
 
+
 /* Modal */
-.ReactModalPortal > div{
+
+.ReactModalPortal > div {
     opacity: 0;
 }
 
@@ -56,6 +59,7 @@ html, body {
 
 
 /* Datepicker */
+
 .react-datetime-picker input:focus {
     outline: none;
 }
@@ -64,7 +68,9 @@ html, body {
     border: 0px solid gray !important;
 }
 
+
 /* FABS */
+
 .fab {
     border-radius: 100%;
     bottom: 25px;
@@ -79,4 +85,11 @@ html, body {
     padding: 10px;
     position: fixed;
     left: 25px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+    margin-bottom: 5%;
 }

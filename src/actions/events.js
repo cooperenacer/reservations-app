@@ -69,10 +69,18 @@ export const eventStartDelete = () => {
 
         const { uid: userUid } = getState().auth;
 
-        console.log(userUid, uid);
+        let permiso = false;
+        // console.log(userUid, uid);
 
-        if (userUid === uid) {
+        if (userUid === 'HlW8UDn7rzeDxt6fJUtAxUTSi2E3') {
+            permiso = true;
+        } else if (userUid === uid) {
+            permiso = true;
+        } else {
+            permiso = false;
+        }
 
+        if (permiso) {
             const event = db.collection('reservation').where('eid', '==', eid);
 
             try {
@@ -100,6 +108,7 @@ export const eventStartDelete = () => {
         } else {
             Swal.fire('Error', 'No tiene permisos para borrar esta cita', 'error')
         }
+        dispatch(eventStartLoading());
     }
 }
 

@@ -7,7 +7,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventStartLoading, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
 
 
 const customStyles = {
@@ -40,7 +40,7 @@ export const CalendarModal = () => {
     const { activeEvent } = useSelector(state => state.calendar);
     const dispatch = useDispatch();
 
-    const { name } = useSelector(state => state.auth)
+    const { uid } = useSelector(state => state.auth)
 
     const [dateStart, setDateStart] = useState(now.toDate());
     const [dateEnd, setDateEnd] = useState(nowPlus1.toDate());
@@ -147,6 +147,7 @@ export const CalendarModal = () => {
                     console.log('cancelada')
                 }
             })
+        dispatch(uiCloseModal());
     }
 
     return (
@@ -161,7 +162,7 @@ export const CalendarModal = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h1> {(activeEvent) ? 'Editar reservación' : 'Crear reservación'} </h1>
                 {
-                    name === 'Cooperenacer' ? (
+                    uid === 'HlW8UDn7rzeDxt6fJUtAxUTSi2E3' ? (
 
                         <button onClick={handleStatus}>Aprobar</button>
                     ) : null

@@ -3,12 +3,12 @@ import React from 'react'
 export const CalendarEvent = ({ event }) => {
 
     // console.log(event)
-    const { title, name } = event;
+    const { nombre, name } = event;
 
     return (
         <div>
-            <strong> { title } </strong>
-            <span>- { name } </span>
+            <strong> {nombre} </strong>
+            <span>- {name} </span>
         </div>
     )
 }

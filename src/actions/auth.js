@@ -57,6 +57,10 @@ export const checkingFinish = () => ({
     type: types.authCheckingFinish
 });
 
+export const startChangePassword = (password, uid) => {
+    // firebase.auth().updateCurrentUser
+}
+
 export const startLogout = () => {
     return async (dispatch) => {
 

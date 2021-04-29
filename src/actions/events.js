@@ -61,15 +61,6 @@ export const eventStartUpdate = (event) => {
     }
 }
 
-
-// export const eventUpdated = (event) => ({
-//     type: types.eventUpdated,
-//     payload: event
-// });
-
-
-
-
 export const eventStartDelete = () => {
 
     return (dispatch, getState) => {

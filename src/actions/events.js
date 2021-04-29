@@ -6,6 +6,9 @@ import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid'
 import Swal from "sweetalert2";
 
+
+const ADMINID = process.env.REACT_APP_ADMINID;
+
 export const eventStartAddNew = (event) => {
 
     const eid = uuidv4();
@@ -72,7 +75,7 @@ export const eventStartDelete = () => {
         let permiso = false;
         // console.log(userUid, uid);
 
-        if (userUid === 'HlW8UDn7rzeDxt6fJUtAxUTSi2E3') {
+        if (userUid === ADMINID) {
             permiso = true;
         } else if (userUid === uid) {
             permiso = true;

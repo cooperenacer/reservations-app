@@ -1,7 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2';
-import { startLogout } from '../../actions/auth';
+import { startChangePassword, startLogout } from '../../actions/auth';
+
+const ADMINID = process.env.REACT_APP_ADMINID;
 
 export const Navbar = () => {
 
@@ -12,7 +14,7 @@ export const Navbar = () => {
         dispatch(startLogout());
     }
 
-    let admin = uid === 'HlW8UDn7rzeDxt6fJUtAxUTSi2E3' ? 'admin' : 'user';
+    let admin = uid === ADMINID ? 'admin' : 'user';
 
     const handlePasswordChanged = () => {
         Swal.mixin({
@@ -43,6 +45,7 @@ export const Navbar = () => {
                     .then((result) => {
                         if (result.isConfirmed) {
                             console.log('confirmar')
+                            dispatch(startChangePassword(password1, uid, 'AdminCoope'))
                         } else {
                             console.log('cancelado');
                         }

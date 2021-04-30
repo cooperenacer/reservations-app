@@ -1,5 +1,7 @@
 FROM node:current-alpine AS build-stage
 
+ARG PORT
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -19,6 +21,6 @@ COPY --from=build-stage /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build-stage /app/build .
 
-EXPOSE 80
+EXPOSE $PORT
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'

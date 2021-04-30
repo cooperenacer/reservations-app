@@ -94,7 +94,7 @@ export const Navbar = () => {
             }
 
 
-            <button className="btn btn-outline-danger" onClick={handleLogout}>
+            <button className="btn btn-outline-danger" onClick={handleLogout} style={{marginRight: '1%'}}>
                 <i className="fas fa-sign-out-alt"></i>
                 <span> Salir</span>
             </button>

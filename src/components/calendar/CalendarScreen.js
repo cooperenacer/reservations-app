@@ -39,12 +39,10 @@ export const CalendarScreen = () => {
 
 
     const onDoubleClick = (e) => {
-        // console.log(e);
         dispatch(uiOpenModal());
     }
 
     const onSelectEvent = (e) => {
-        // console.log(events)
         dispatch(eventSetActive(e));
     }
 
@@ -54,7 +52,6 @@ export const CalendarScreen = () => {
     }
 
     const onSelectSlot = (e) => {
-        // console.log(e)
         dispatch(eventClearActiveEvent());
     }
 
@@ -75,7 +72,6 @@ export const CalendarScreen = () => {
         }
 
         const style = {
-            // backgroundColor: (uid === event.uid) ? '#367CF7' : '#465660',
             backgroundColor: color,
             borderRadius: '0px',
             opacity: 0.8,

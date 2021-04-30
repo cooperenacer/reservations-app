@@ -54,15 +54,36 @@ export const Navbar = () => {
         })
     }
 
+    const showInfo = () => {
+        Swal.fire({
+            title: 'Estados de reservación',
+            confirmButtonText:
+                '<i class="fa fa-thumbs-up"></i> Aceptada',
+            confirmButtonColor: '#5cc72e',
+            showCancelButton: true,
+            cancelButtonText:
+                'Pendiente',
+            cancelButtonColor: '#367CF7',
+            denyButtonColor: '#EB0606',
+            showCloseButton: true,
+            showDenyButton: true,
+            denyButtonText: '<i class="fa fa-thumbs-down"></i> Rechazar',
+        })
+    }
+
     return (
         <div className="navbar navbar-dark bg-dark mb-4">
             <span className="navbar-brand">
                 {name}
             </span>
 
-            <span className="navbar-brand">
+            <span className="navbar-brand" style={{ paddingRight: '30%' }}>
                 {admin === 'admin' ? 'Administrador' : ''}
             </span>
+
+            <button className="btn btn-outline-info" style={{ marginLeft: '20%' }} onClick={showInfo}>
+                <span> Conocer estados de reservación </span>
+            </button>
 
             {
                 admin === 'admin' ? (
@@ -71,6 +92,7 @@ export const Navbar = () => {
                     </button>
                 ) : null
             }
+
 
             <button className="btn btn-outline-danger" onClick={handleLogout}>
                 <i className="fas fa-sign-out-alt"></i>

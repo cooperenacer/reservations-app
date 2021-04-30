@@ -18,7 +18,8 @@ export const DeleteEventFab = () => {
             onClick={handleDelete}
         >
             <i className="fas fa-trash"></i>
-            <span> Borrar evento </span>
+            <span> Borrar reservación </span>
         </button>
+        
     )
 }

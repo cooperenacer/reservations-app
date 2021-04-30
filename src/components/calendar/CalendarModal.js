@@ -54,6 +54,8 @@ export const CalendarModal = () => {
 
     const ADMINID = process.env.REACT_APP_ADMINID;
 
+    console.log('User ids', uid, ADMINID)
+
 
     useEffect(() => {
         if (activeEvent) {

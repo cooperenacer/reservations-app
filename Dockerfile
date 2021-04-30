@@ -19,6 +19,6 @@ COPY --from=build-stage /app/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build-stage /app/build .
 
-EXPOSE 3000
+EXPOSE 80
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

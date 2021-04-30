@@ -107,6 +107,7 @@ export const LoginScreen = () => {
                                         name="rName"
                                         value={rName}
                                         onChange={handleRegisterInputChange}
+                                        required={true}
                                     />
                                 </div>
                                 <div className="form-group">

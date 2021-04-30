@@ -40,7 +40,6 @@ export const calendarReducer = (state = initialState, action) => {
             }
 
         case types.eventDeleted:
-            console.log(state.events)
             return {
                 ...state,
                 events: state.events.filter(

@@ -18,7 +18,7 @@ export const eventStartAddNew = (event) => {
         const { uid, name } = getState().auth;
         const state = 1;
         try {
-            console.log('EVENTO', event)
+
             await db.collection("reservation").add(
                 {
                     eid,
@@ -53,21 +53,10 @@ export const eventSetActive = (event) => ({
 
 export const eventClearActiveEvent = () => ({ type: types.eventClearActiveEvent });
 
-//Realizar
+
 export const eventStartUpdate = (event) => {
-    return async (dispatch) => {
-        try {
 
-        } catch (error) {
-
-        }
-    }
-}
-
-export const eventStartDelete = () => {
-
-    return (dispatch, getState) => {
-
+    return async (dispatch, getState) => {
         const { eid, uid } = getState().calendar.activeEvent;
 
         const { uid: userUid } = getState().auth;
@@ -84,6 +73,55 @@ export const eventStartDelete = () => {
         }
 
         if (permiso) {
+
+            try {
+
+                const getEvent = await db.collection('reservation').where('eid', '==', eid);
+
+                const docRef = await getEvent.get()
+
+                const ref = await docRef.docs[0].id;
+
+                db.doc(`reservation/${ref}`).update(event)
+                    .then(() => {
+                        Swal.fire(
+                            'Actualización',
+                            'Reservación actualizada con éxito',
+                            'info'
+                        )
+                        dispatch(eventUpdated(event))
+                        dispatch(eventStartLoading())
+                    })
+                    .catch((e) => console.log(e))
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            Swal.fire('Error', 'No tiene permisos para editar esta reservacion', 'error');
+        }
+    }
+}
+
+export const eventStartDelete = () => {
+
+    return (dispatch, getState) => {
+
+        const { eid, uid } = getState().calendar.activeEvent;
+
+        const { uid: userUid } = getState().auth;
+
+        let permiso = false;
+
+        if (userUid === ADMINID) {
+            permiso = true;
+        } else if (userUid === uid) {
+            permiso = true;
+        } else {
+            permiso = false;
+        }
+
+        if (permiso) {
+
             const event = db.collection('reservation').where('eid', '==', eid);
 
             try {
@@ -138,15 +176,12 @@ export const eventStartLoading = () => {
 
             query.forEach(doc => {
                 data.push(doc.data())
-                // console.log(moment(doc.data().end.toDate()).format("YYYY-MM-DD HH:mm:ss"))
             });
 
             const newData = prepareData(data);
 
-            // console.log('ND', newData);
             const events = prepareEvents(newData);
 
-            console.log('events', events)
             dispatch(eventLoaded(events));
 
         } catch (error) {
@@ -181,7 +216,6 @@ export const eventStartStatusUpdate = (event, status) => {
                 state: status
             })
                 .then(() => {
-                    console.log('status actualizado')
                     dispatch(eventUpdated(event))
                     dispatch(eventStartLoading())
                 })

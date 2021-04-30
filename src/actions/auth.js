@@ -57,7 +57,7 @@ export const checkingFinish = () => ({
     type: types.authCheckingFinish
 });
 
-export const startChangePassword = (password, uid, currentPass) => {
+export const startChangePassword = (password ) => {
 
     return async () => {
 

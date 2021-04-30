@@ -7,7 +7,7 @@ import DateTimePicker from 'react-datetime-picker';
 import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventStartUpdate } from '../../actions/events';
 
 require('dotenv').config()
 
@@ -52,7 +52,9 @@ export const CalendarModal = () => {
 
     const { motivo, nombre, cedula, start, end } = formValues;
 
-    const ADMINID = process.env.REACT_APP_ADMINID
+    const ADMINID = process.env.REACT_APP_ADMINID;
+
+
     useEffect(() => {
         if (activeEvent) {
             setFormValues(activeEvent);
@@ -110,7 +112,7 @@ export const CalendarModal = () => {
         }
 
         if (activeEvent) {
-            dispatch(eventUpdated(formValues))
+            dispatch(eventStartUpdate(formValues))
         } else {
             dispatch(eventStartAddNew(formValues))
         }
@@ -118,15 +120,18 @@ export const CalendarModal = () => {
 
         setTitleValid(true);
         closeModal();
-        Swal.fire('Informacion',
-            'Revisar de nuevo la agenda entre las siguientes 24-48 horas para conocer el resultado de la reserva',
-            'info')
+        if (!activeEvent) {
+
+            Swal.fire(
+                'Solicitud de reservación creada',
+                'Revisar de nuevo la agenda entre las siguientes 24-48 horas para conocer el resultado de la reserva',
+                'success')
+        }
 
     }
 
     const handleStatus = (e) => {
         e.preventDefault();
-        // console.log('cambiar estado', activeEvent?.eid)
 
         Swal.fire({
             title: 'Cambiar estado de reservación',
@@ -142,10 +147,8 @@ export const CalendarModal = () => {
             .then((result) => {
                 if (result.isConfirmed) {
                     dispatch(eventStartStatusUpdate(activeEvent, 2))
-                    console.log('aceptada');
                 } else if (result.isDenied) {
                     dispatch(eventStartStatusUpdate(activeEvent, 3))
-                    console.log('rechazada')
                 } else {
                     console.log('cancelada')
                 }

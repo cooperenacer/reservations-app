@@ -45,7 +45,7 @@ export const Navbar = () => {
                     .then((result) => {
                         if (result.isConfirmed) {
                             console.log('confirmar')
-                            dispatch(startChangePassword(password1, uid, 'AdminCoope'))
+                            dispatch(startChangePassword(password1))
                         } else {
                             console.log('cancelado');
                         }

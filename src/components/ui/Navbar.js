@@ -2,8 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2';
 import { startChangePassword, startLogout } from '../../actions/auth';
+import { adminId } from '../../firebase/firebase-config';
 
-const ADMINID = process.env.REACT_APP_ADMINID;
+
 
 export const Navbar = () => {
 
@@ -14,7 +15,7 @@ export const Navbar = () => {
         dispatch(startLogout());
     }
 
-    let admin = uid === ADMINID ? 'admin' : 'user';
+    let admin = uid === adminId ? 'admin' : 'user';
 
     const handlePasswordChanged = () => {
         Swal.mixin({

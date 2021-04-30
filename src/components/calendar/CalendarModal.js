@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 import { uiCloseModal } from '../../actions/ui';
 import { eventClearActiveEvent, eventStartAddNew, eventStartStatusUpdate, eventStartUpdate } from '../../actions/events';
+import { adminId } from '../../firebase/firebase-config';
 
 require('dotenv').config()
 
@@ -52,9 +53,6 @@ export const CalendarModal = () => {
 
     const { motivo, nombre, cedula, start, end } = formValues;
 
-    const ADMINID = process.env.REACT_APP_ADMINID;
-
-    console.log('User ids', uid, ADMINID)
 
 
     useEffect(() => {
@@ -75,7 +73,6 @@ export const CalendarModal = () => {
 
 
     const closeModal = () => {
-        // TODO: cerrar el modal
         dispatch(uiCloseModal());
         dispatch(eventClearActiveEvent());
         setFormValues(initEvent);
@@ -170,7 +167,7 @@ export const CalendarModal = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <h1> {(activeEvent) ? 'Editar reservación' : 'Crear reservación'} </h1>
                 {
-                    uid === ADMINID ? (
+                    uid === adminId ? (
 
                         <button onClick={handleStatus}>Aprobar</button>
                     ) : null

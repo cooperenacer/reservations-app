@@ -1,4 +1,4 @@
-import { db } from "../firebase/firebase-config";
+import { adminId, db } from "../firebase/firebase-config";
 import { prepareEvents } from "../helpers/prepareEvents";
 import { types } from "../types/types";
 import moment from 'moment'
@@ -7,7 +7,6 @@ import { v4 as uuidv4 } from 'uuid'
 import Swal from "sweetalert2";
 
 
-const ADMINID = process.env.REACT_APP_ADMINID;
 
 export const eventStartAddNew = (event) => {
 
@@ -62,9 +61,8 @@ export const eventStartUpdate = (event) => {
         const { uid: userUid } = getState().auth;
 
         let permiso = false;
-        // console.log(userUid, uid);
 
-        if (userUid === ADMINID) {
+        if (userUid === adminId) {
             permiso = true;
         } else if (userUid === uid) {
             permiso = true;
@@ -112,7 +110,7 @@ export const eventStartDelete = () => {
 
         let permiso = false;
 
-        if (userUid === ADMINID) {
+        if (userUid === adminId) {
             permiso = true;
         } else if (userUid === uid) {
             permiso = true;

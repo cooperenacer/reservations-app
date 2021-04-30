@@ -22,5 +22,6 @@ const db = firebase.firestore();
 
 export {
     db,
-    firebase
+    firebase,
+    adminId
 }

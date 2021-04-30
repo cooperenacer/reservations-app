@@ -68,7 +68,7 @@ export const Navbar = () => {
             denyButtonColor: '#EB0606',
             showCloseButton: true,
             showDenyButton: true,
-            denyButtonText: '<i class="fa fa-thumbs-down"></i> Rechazar',
+            denyButtonText: '<i class="fa fa-thumbs-down"></i> Rechazada',
         })
     }
 

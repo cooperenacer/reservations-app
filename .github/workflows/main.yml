@@ -20,4 +20,4 @@ jobs:
           dockerfile: 'Dockerfile'
           dockerfile_path: ''
           options: ''
-          formation: ''
+          formation: 'web'
